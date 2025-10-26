@@ -1,0 +1,52 @@
+Install the latest Python version, i use 3.13.9.
+The system has been tested only in Windows.
+Copy the "artngame_unity_upgrades_scraper.py" file in an
+empty folder and open the command prompt in that
+folder.
+
+Install the below for Python
+
+python -m pip install --upgrade pip
+pip install playwright
+python -m playwright install
+python -m pip install requests
+
+Add a publishers.txt file to define more than one publisher
+Use name, publisher page URL format per line.
+e.g. 1st line
+ARTnGAME, https://assetstore.unity.com/publishers/6503?pageSize=96
+
+Run the file in the command prompt like below, while in the folder that
+includes the file.
+C:\Users\nasos\Documents\UnityPython> python artngame_unity_upgrades_scraper.py
+
+The system will start in non headless mode to login to Unity account 
+and then create the "storage_state.json" to keep the login alive
+in next sessions. The next sessions will default to background
+headless mode with a debug shown in command console.
+
+After log in hit Enter in the command to proceed with the first run of
+the system, the run will continue in background headless mode.
+
+Optionally can use the "--no-headless" argument in python command 
+to see the pages load.
+
+The results are saved in unity_upgrade_discounts.csv and when
+opened will also have clickable links to the assets and the
+original and discounted price and the Publisher of the asset.
+
+The "processed_assets.txt" saves the processed files thus far, in
+case the script is interrupted. If need to renew all assets status
+should erase the file to check all assets again.
+
+The discounts include upgrade discounts and also any current
+Unity sale discounts.
+
+NOTES:
+Do not open the files the system saved to, since can crash the program.
+Can copy the CSV file and open the copy to preview the current progress.
+
+If some entries return empty, may consider lowering the concurrent items
+per batch and increase the wait time in the below code lines
+BATCH_SIZE = 10
+DELAY_BETWEEN_BATCHES = 10  # seconds
